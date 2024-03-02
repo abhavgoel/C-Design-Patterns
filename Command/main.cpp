@@ -1,4 +1,4 @@
-#include<bits/stdc++.h>
+#include<iostream>
 
 // Receiver  - Receives the command and carries out the command
 //More simply  - the one actually doing the action we commanded
@@ -32,7 +32,7 @@ private:
 
 public:
     // Function to execute a move command
-    void execute(Character& c) override {
+    void execute(Character& c) {
         int randx = rand() % 4;
         int randy = rand() % 4;
         c.move(randx, randy);
@@ -42,7 +42,7 @@ public:
     }
 
     // Function to undo a move command
-    void undo(Character& c) override {
+    void undo(Character& c) {
         c.move(-x, -y);
         std::cout << c.name << " undo " << -x << " , " << -y << "\n";
     }
