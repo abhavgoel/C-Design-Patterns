@@ -1,6 +1,7 @@
 #include<bits/stdc++.h>
 
-// Define a Character structure with x, y coordinates and a name
+// Receiver  - Receives the command and carries out the command
+//More simply  - the one actually doing the action we commanded
 struct Character {
     int x;
     int y;
@@ -16,17 +17,14 @@ struct Character {
     }
 };
 
-// Base class representing a command
+// Base class representing a command - A command interface which is a blueprint for commands
 class Command {
 public:
-    virtual ~Command() {}
-
-    // Abstract functions for executing and undoing a command
     virtual void execute(Character& c) = 0;
     virtual void undo(Character& c) = 0;
 };
 
-// Derived class representing a move command
+// Derived class representing a move command --> Concrete command
 class Move : public Command {
 private:
     int x;
@@ -54,7 +52,7 @@ int main() {
     // Create a Character named Kratos
     Character Kratos("Kratos");
 
-    // Create a vector to store pointers to Command objects
+    // Create a vector to store pointers to Command objects (history of commands)
     std::vector<Command*> command_queue;
 
     // Create Move objects and add them to the command queue
@@ -78,11 +76,6 @@ int main() {
     // Undo each command in reverse order
     for (int i = command_queue.size() - 1; i >= 0; i--) {
         command_queue[i]->undo(Kratos);
-    }
-
-    // Cleanup: delete dynamically allocated Move objects
-    for (Command* cmd : command_queue) {
-        delete cmd;
     }
 
     return 0;
